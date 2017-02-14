@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'pronto/gem_version.rb'
+require 'danger_pronto/gem_version.rb'
 
 Gem::Specification.new do |spec|
   spec.name          = 'danger-pronto'
   spec.version       = Pronto::VERSION
   spec.authors       = ['RestlessThinker']
   spec.email         = ['penaflor@gmail.com']
-  spec.description   = %q{A short description of danger-pronto.}
-  spec.summary       = %q{A longer description of danger-pronto.}
+  spec.description   = 'A Danger plugin to lint files through Pronto.'
+  spec.summary       = 'A Danger plugin to lint files through Pronto.'
   spec.homepage      = 'https://github.com/RestlessThinker/danger-pronto'
   spec.license       = 'MIT'
 

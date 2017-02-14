@@ -1,1 +1,1 @@
-require 'pronto/plugin'
+require 'danger_pronto/plugin'

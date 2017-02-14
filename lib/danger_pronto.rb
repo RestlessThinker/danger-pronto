@@ -1,1 +1,1 @@
-require 'pronto/gem_version'
+require 'danger_pronto/gem_version'

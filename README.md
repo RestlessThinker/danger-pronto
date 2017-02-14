@@ -1,20 +1,51 @@
 # danger-pronto
 
-A description of danger-pronto.
+A [Danger](https://github.com/danger/danger) plugin for [Pronto](https://github.com/mmozuras/pronto).
+Created by the folks at [ABODO](https://www.abodo.com)
 
 ## Installation
 
-    $ gem install danger-pronto
+Add this line to your Gemfile:
+
+```rb
+gem 'danger-pronto'
+```
+
+Add pronto and runners to your Gemfile:
+
+```rb
+gem 'pronto'
+gem 'pronto-jshint'
+gem 'pronto-rubocop'
+gem 'pronto-scss'
+```
 
 ## Usage
 
-    Methods and attributes from this plugin are available in
-    your `Dangerfile` under the `pronto` namespace.
+Run Files through Pronto.
+Results are passed out as a table in markdown.
 
-## Development
 
-1. Clone this repo
-2. Run `bundle install` to setup dependencies.
-3. Run `bundle exec rake spec` to run the tests.
-4. Use `bundle exec guard` to automatically have tests run as you make changes.
-5. Make your changes.
+> Specifying custom config file.
+> ```ruby
+pronto.lint
+> ```
+
+> Lint specific files in a folder, when they change
+> ```ruby
+public_files = (modified_files + added_files).select { |path| path.include?("/public/") }
+pronto.lint public_files
+> ```
+
+#### Methods
+
+
+`lint(files: String)`
+
+ Runs files through Pronto. Generates a `markdown` list of warnings.
+
+
+
+## License
+
+MIT
