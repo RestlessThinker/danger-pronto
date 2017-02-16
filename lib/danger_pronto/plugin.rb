@@ -45,7 +45,7 @@ module Danger
       pronto_output = `#{'bundle exec ' if File.exists?('Gemfile')}pronto run -f json`
 
       JSON.parse(pronto_output)
-          .select { |f| files_to_lint.include?(f['path']) && f['level'].present? }
+          .select { |f| files_to_lint.include?(f['path']) }
     end
 
     # Builds the t
