@@ -29,6 +29,8 @@ module Danger
       markdown offenses_message(offending_files)
     end
 
+    # Gets the offending files from pronto
+    # @return [Array<Object>] Array of pronto warnings
     def offending_files(files = nil)
       files_to_lint = fetch_files_to_lint(files)
       pronto(files_to_lint)
@@ -38,16 +40,12 @@ module Danger
 
     # Executes pronto command
     #
-    # @param [Array<String>] Files to lint
+    # @param [Array<String>] files_to_lint
     # @return [Hash] Converted hash from pronto json output
     #
     def pronto(files_to_lint)
       pronto_output = `#{'bundle exec ' if File.exists?('Gemfile')}pronto run -f json`
-
-      puts pronto_output.inspect
-
       JSON.parse(pronto_output)
-          .select { |f| files_to_lint.include?(f['path']) }
     end
 
     # Builds the t
@@ -58,7 +56,7 @@ module Danger
       table = Terminal::Table.new(
         headings: %w(File Line Reason Runner),
         style: { border_i: '|' },
-        rows: offending_files.each do |file|
+        rows: offending_files.map do |file|
           [file['path'], file['line'], file['message'], file['runner']]
         end
       ).to_s
@@ -66,7 +64,7 @@ module Danger
     end
 
     # Sets default files to modified and added files per commit
-    # @param [Array<String>] Files to lint
+    # @param [Array<String>] files Optional specific files to lint
     #
     # @return [Array<String>] Final files to lint
     #
