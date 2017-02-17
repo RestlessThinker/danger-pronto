@@ -1,6 +1,7 @@
 # danger-pronto
 
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE.txt)
+[![Gem](https://img.shields.io/gem/v/danger-pronto.svg?style=flat)](https://rubygems.org/gems/danger-pronto)
 
 A [Danger](https://github.com/danger/danger) plugin for [Pronto](https://github.com/mmozuras/pronto).
 Created by the folks at [ABODO](https://www.abodo.com). By default, only lints added or modified files.
