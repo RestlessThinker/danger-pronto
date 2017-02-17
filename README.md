@@ -1,7 +1,9 @@
 # danger-pronto
 
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE.txt)
+
 A [Danger](https://github.com/danger/danger) plugin for [Pronto](https://github.com/mmozuras/pronto).
-Created by the folks at [ABODO](https://www.abodo.com)
+Created by the folks at [ABODO](https://www.abodo.com). By default, only lints added or modified files.
 
 ## Installation
 
