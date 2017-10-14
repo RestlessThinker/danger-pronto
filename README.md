@@ -29,16 +29,16 @@ Run Files through Pronto.
 Results are passed out as a table in markdown.
 
 
-> Specifying custom config file.
-> ```ruby
+Specifying custom config file.
+```ruby
 pronto.lint
-> ```
+```
 
-> Lint specific files in a folder, when they change
-> ```ruby
+Lint specific files in a folder, when they change
+```ruby
 public_files = (modified_files + added_files).select { |path| path.include?("/public/") }
 pronto.lint public_files
-> ```
+```
 
 #### Methods
 
