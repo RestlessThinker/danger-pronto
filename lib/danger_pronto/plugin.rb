@@ -14,7 +14,7 @@ module Danger
   class DangerPronto < Plugin
 
     # Runs files through Pronto. Generates a `markdown` list of warnings.
-    def lint
+    def lint(files = nil)
       files = pronto
       return if files.empty?
 
