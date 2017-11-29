@@ -14,8 +14,8 @@ module Danger
   class DangerPronto < Plugin
 
     # Runs files through Pronto. Generates a `markdown` list of warnings.
-    def lint(files = nil)
-      files = pronto
+    def lint(commit = nil)
+      files = pronto(commit)
       return if files.empty?
 
       markdown offenses_message(files)
@@ -24,9 +24,12 @@ module Danger
     private
 
     # Executes pronto command
+    # @param commit [String] hash/branch/tag
     # @return [Hash] Converted hash from pronto json output
-    def pronto
-      pronto_output = `#{'bundle exec ' if File.exists?('Gemfile')}pronto run -f json -c origin/master`
+    def pronto(specified_commit = nil)
+      commit = "origin/master"
+      commit = specified_commit if specified_commit.present?
+      pronto_output = `#{'bundle exec ' if File.exists?('Gemfile')}pronto run -f json -c #{commit}`
       JSON.parse(pronto_output)
     end
 
