@@ -14,41 +14,23 @@ module Danger
   class DangerPronto < Plugin
 
     # Runs files through Pronto. Generates a `markdown` list of warnings.
-    #
-    # @param [String] files
-    #         A globbed string which should return the files that you want to
-    #         run though, defaults to nil. If nil, modified and added files from
-    #         the diff will be used.
-    # @return [void]
-    #
     def lint(files = nil)
-      files_to_lint = fetch_files_to_lint(files)
+      files = pronto
+      return if files.empty?
 
-      return if offending_files.empty?
-
-      markdown offenses_message(offending_files)
-    end
-
-    # Gets the offending files from pronto
-    # @return [Array<Object>] Array of pronto warnings
-    def offending_files(files = nil)
-      files_to_lint = fetch_files_to_lint(files)
-      pronto(files_to_lint)
+      markdown offenses_message(files)
     end
 
     private
 
     # Executes pronto command
-    #
-    # @param [Array<String>] files_to_lint
     # @return [Hash] Converted hash from pronto json output
-    #
-    def pronto(files_to_lint)
-      pronto_output = `#{'bundle exec ' if File.exists?('Gemfile')}pronto run -f json`
+    def pronto
+      pronto_output = `#{'bundle exec ' if File.exists?('Gemfile')}pronto run -f json -c origin/master`
       JSON.parse(pronto_output)
     end
 
-    # Builds the t
+    # Builds the message
     def offenses_message(offending_files)
       require 'terminal-table'
 
@@ -61,15 +43,6 @@ module Danger
         end
       ).to_s
       message + table.split("\n")[1..-2].join("\n")
-    end
-
-    # Sets default files to modified and added files per commit
-    # @param [Array<String>] files Optional specific files to lint
-    #
-    # @return [Array<String>] Final files to lint
-    #
-    def fetch_files_to_lint(files = nil)
-      @files_to_lint ||= (files ? Dir.glob(files) : (git.modified_files + git.added_files))
     end
   end
 end
