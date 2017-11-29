@@ -25,7 +25,7 @@ gem 'pronto-scss'
 
 ## Usage
 
-Run Files through Pronto.
+Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
 Results are passed out as a table in markdown.
 
 
@@ -34,18 +34,17 @@ Specifying custom config file.
 pronto.lint
 ```
 
-Lint specific files in a folder, when they change
+Run checks on a diff between the current HEAD and a specified commit
 ```ruby
-public_files = (modified_files + added_files).select { |path| path.include?("/public/") }
-pronto.lint public_files
+pronto.lint("e757913")
 ```
 
 #### Methods
 
 
-`lint(files: String)`
+`lint(commit: String)`
 
- Runs files through Pronto. Generates a `markdown` list of warnings.
+ Runs checks on a diff between the current HEAD and the provided commit-ish (default is master). Generates a `markdown` list of warnings.
 
 
 
